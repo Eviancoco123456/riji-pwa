@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#534AB7" />
+  <title>日迹 - 每日作业跟进</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="日迹" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo">日迹</span>
+      <span class="sub">每日作业 · 错题 · 薄弱点</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- 今日作业 -->
+    <section class="page active" id="page-today">
+      <div class="day-bar">
+        <button class="day-nav" id="date-prev">‹</button>
+        <div class="day-info">
+          <div id="today-label">今天</div>
+          <div id="today-date" class="day-date"></div>
+        </div>
+        <button class="day-nav" id="date-next">›</button>
+      </div>
+
+      <div class="upload-zone">
+        <button class="btn btn-primary block" id="btn-capture">📷 拍照识别作业</button>
+        <button class="btn btn-outline block" id="btn-pick">🖼️ 从相册选择图片</button>
+        <input type="file" id="file-capture" accept="image/*" capture="environment" hidden />
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+
+      <div id="parse-loading" class="loading hidden">正在用千问识别图片…</div>
+
+      <div id="parse-preview" class="parse-preview hidden">
+        <h3>识别结果（请核对修改）</h3>
+        <div id="parse-items"></div>
+        <p class="hint" id="parse-tip"></p>
+        <div class="form-actions">
+          <button class="btn btn-outline" id="btn-add-row">+ 手动添加</button>
+          <button class="btn btn-primary" id="btn-save-homework">保存今日作业</button>
+        </div>
+      </div>
+
+      <div id="item-grade-loading" class="loading hidden">正在用千问批改这条作业…</div>
+      <div id="today-summary" class="summary"></div>
+      <div id="today-list" class="hw-list"></div>
+      <div id="today-empty" class="empty hidden">今天还没有作业。点上方「拍照识别」或「从相册选择」上传作业图吧。</div>
+
+      <div class="backup-box">
+        <div class="backup-title">⚙️ 数据备份（题库长期保存）</div>
+        <p class="backup-hint">建议每周导出一次。换手机/换链接时用「导入题库」恢复，数据永不丢失。</p>
+        <div class="backup-actions">
+          <button class="btn btn-outline" id="btn-export">⬇️ 导出题库</button>
+          <button class="btn btn-outline" id="btn-import">⬆️ 导入题库</button>
+          <input type="file" id="file-import" accept="application/json,.json" hidden />
+        </div>
+      </div>
+    </section>
+
+    <!-- 错题库 -->
+    <section class="page" id="page-wrongbook">
+      <h2 class="page-title">错题库</h2>
+      <div id="wrong-summary" class="subject-summary"></div>
+      <div id="wrong-list" class="card-list"></div>
+    </section>
+
+    <!-- 薄弱点 -->
+    <section class="page" id="page-weakpoints">
+      <h2 class="page-title">薄弱点</h2>
+      <div id="weak-summary" class="subject-summary"></div>
+      <div id="weak-list" class="card-list"></div>
+    </section>
+
+    <!-- 每日反馈 -->
+    <section class="page" id="page-feedback">
+      <h2 class="page-title">每日反馈</h2>
+      <div id="feedback-list"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="today"><span>📚</span>今日</button>
+    <button class="nav-item" data-page="wrongbook"><span>❌</span>错题</button>
+    <button class="nav-item" data-page="weakpoints"><span>🎯</span>薄弱</button>
+    <button class="nav-item" data-page="feedback"><span>📊</span>反馈</button>
+  </nav>
+
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/homework.js"></script>
+  <script src="js/grading.js"></script>
+  <script src="js/wrongbook.js"></script>
+  <script src="js/weakpoints.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
